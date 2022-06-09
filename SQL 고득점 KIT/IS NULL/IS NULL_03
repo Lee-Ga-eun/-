@@ -1,0 +1,7 @@
+
+-- 이름이 없는 경우 (NULL인 경우), No name으로 보여지도록 한다
+-- IFNULL 활용
+
+SELECT ANIMAL_TYPE, IFNULL(NAME, 'No name') 'NAME', SEX_UPON_INTAKE
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID;
