@@ -1,0 +1,13 @@
+-- 문제: GROUP BY, 입양 시각 구하기(2)
+-- 핵심: 시간 별 데이터를 뽑되, 0부터 23시 까지 모두 표시되는 행이 있는 테이블을 만든다
+
+WITH RECURSIVE CTE AS(
+ SELECT 0 AS hour
+ UNION ALL
+ SELECT hour+1 FROM CTE WHERE hour < 23
+)
+SELECT hour "HOUR", COUNT(ANI.ANIMAL_ID) "COUNT"
+FROM CTE
+LEFT JOIN ANIMAL_OUTS AS ANI 
+ON CTE.hour = HOUR(ANI.DATETIME)
+GROUP BY hour
