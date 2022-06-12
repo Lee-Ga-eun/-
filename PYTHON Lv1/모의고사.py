@@ -94,3 +94,36 @@ def solution(answers):
     answer=[key for key, value in score.items() if value==highest]
 
     return answer
+
+"""
+한번 더
+"""
+def solution(answers):
+# 학생들의 답안지를 딕셔너리로 생성. 학생1, 학생2, 학생3가 있다
+    student={1:[1,2,3,4,5],2:[2,1,3,4,5,2,3,2,1,3,4,5,2,3],3:[5,5,3,3,2,2,1,1,5,5,3,3]}
+
+# 맞춘 수를 넣을 score라는 딕셔너리를 생성(초기화: 1번 0점, 2번 0점, 3번 0점)
+    score={1:0, 2:0, 3:0}
+
+#for문을 통해, 이제 답지와 비교를 시작한다.(enumerate함수를 활용)답이 맞으면 score 딕셔너리의 값을 증가시킨다
+    # idx % len(value)
+    #items: 딕셔너리의 키와 값의 쌍을 얻을 수 있음
+    #for key, value in student.items():
+        #[1, [1,2,3,4,5]]
+    for idx, answer in enumerate(answers):
+        for key, value in student.items():
+            # answers: [1,2,3,4,5]
+            # answer: [1]
+            if answer == value[idx%len(value)]:
+                score[key]+=1
+            
+    answer=[]
+
+#score 중 이제 최대값을 찾은 후, 최대값의 인덱스를 뽑아낸다. (학생 번호를 리스트로 추출)
+
+    #{1:2,2:1,3:0} 이라고 생각
+    for key, value in score.items():
+        if value == max(score.values()):
+            answer.append(key)
+    
+    return answer
