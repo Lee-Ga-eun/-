@@ -38,4 +38,59 @@ def solution(answers):
     answer=list(filter(lambda x: cnt[x]==max_item, range(len(cnt))))
     # 위치에 1을 더해주며 리턴 (인덱스이기 때문에)
     return list(map(lambda x: answer[x]+1, range(len(answer))))
-        
+
+
+"""
+#다른 풀이1
+
+<enumerate: 원소와 인덱스를 같이 출력하고 싶을 때>
+
+for i, letter in enumerate(['A', 'B', 'C']):
+    print(i, letter)
+
+>> 0 A
+   1 B
+   2 C
+
+"""
+def solution(answers):
+    pattern1 = [1,2,3,4,5]
+    pattern2 = [2,1,2,3,2,4,2,5]
+    pattern3 = [3,3,1,1,2,2,4,4,5,5]
+    score = [0, 0, 0]
+    result = []
+
+#idx%len() : answer의 길이와 패턴 1,2,3 각각의 길이는 다르지만, 
+# 패턴 1,2,3의 요소를 계속 반복적으로 사용하여 길이를 맞춰 사용할 수 있게 한다
+    for idx, answer in enumerate(answers):
+        if answer == pattern1[idx%len(pattern1)]:
+            score[0] += 1
+        if answer == pattern2[idx%len(pattern2)]:
+            score[1] += 1
+        if answer == pattern3[idx%len(pattern3)]:
+            score[2] += 1
+
+    for idx, s in enumerate(score):
+        if s == max(score):
+            result.append(idx+1)
+
+    return result
+
+
+"""
+# 다른 풀이 2
+
+"""
+def solution(answers):
+    student={1:[1,2,3,4,5],2:[2,1,2,3,2,4,2,5],3:[3,3,1,1,2,2,4,4,5,5]}
+    score={1:0, 2:0, 3:0}
+
+    for idx, answer in enumerate(answers):
+        for key, value in student.items():
+            if answer==value[idx%len(value)]:
+                score[key]+=1
+    
+    highest=max(score.values())
+    answer=[key for key, value in score.items() if value==highest]
+
+    return answer
