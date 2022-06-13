@@ -1,4 +1,11 @@
+"""
+문제 설명
+몇 학생들은 체육복을 도난 맞았으며, 체육복이 없으면 수업에 참석할 수 없다
+이때 여분의 체육복을 갖고 있는 학생은 자신을 기준으로 앞 뒤 중 한 명에게 체육복을 빌려줄 수 있다
+단, 여분이 있는데 도난을 맞았다면 빌려줄 수 없다
+수업에 참석할 수 있는 학생 수는?
 
+"""
 
 
 
@@ -61,3 +68,35 @@ def solution(n, lost, reserve):
     """
 
     return answer
+
+
+#다른 풀이1
+
+def solution(n, lost, reserve):
+    #여분이 있는데 도둑 맞은 경우엔, 여분을 제공할 수 없다
+    reserving_person=[r for r in reserve if r not in lost] # 여분을 확실하게 갖고 있는 사람
+    lost_person=[l for l in lost if l not in reserve] #확실하게 잃어버린 사람
+
+    for r in reserving_person:
+        front_person_num=r-1 #여분을 제공할 수 있는 사람의 앞 번호
+        back_person_num=r+1 #여분을 제공할 수 있는 사람의 뒷 번호
+        if front_person_num in lost_person:
+            lost_person.remove(front_person_num)
+        elif back_person_num in lost_person:
+            lost_person.remove(back_person_num)
+        
+    return n-len(lost_person)
+
+#다른 풀이2
+def solution(n, lost, reserve):
+    
+    reserved=set(reserve)-set(lost)
+    losted=set(lost)-set(reserve)
+
+    for r in sorted(reserved):
+        if r-1 in losted:
+            losted=losted-{r-1}
+        elif r+1 in losted:
+            losted=losted+{r+1}
+    return n-len(losted)
+    
