@@ -24,7 +24,10 @@ def solution(s):
         else:
             print(s_)
             result+=(10**idx)*int(s_)
+            # result+=(10**idx)*(ord(s_)-48)
             
     return result
+
+
         
         
