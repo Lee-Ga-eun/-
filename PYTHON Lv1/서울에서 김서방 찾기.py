@@ -23,6 +23,8 @@ def solution(seoul):
 
     # "seoul.index("Kim")으로 하면 출력되지 않음. 왜?
 
+    # -------> 김서방 앞의 "와 K 앞의 "가 묶이기 때문이다
+
 #풀이3
 def solution(seoul):
     return '김서방은 {0}에 있다'.format(seoul.index('Kim'))
