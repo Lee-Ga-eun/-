@@ -1,0 +1,15 @@
+
+# 동물 보호소에 들어온 정보가 담긴 테이블: ANIMAL_INS
+# 동물 보호소로부터 입양된 동물 정보가 담긴 테이블: ANIMAL_OUTS
+
+# ANIMAL_OUTS에 있다는 건, 무조건 보호소에 있었다는 의미
+# OUTER JOIN하면 Null 값도 조회됨
+# 무엇을 LEFT , RIGHT ?
+# FROM JOIN ON
+#ON : ANIMAL_ID가 같은 것으로
+# WHERE 
+SELECT O.ANIMAL_ID, O.NAME
+FROM ANIMAL_OUTS O
+    LEFT OUTER JOIN ANIMAL_INS I
+    ON I.ANIMAL_ID = O.ANIMAL_ID
+WHERE I.ANIMAL_ID IS NULL
