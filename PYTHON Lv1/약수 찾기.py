@@ -81,3 +81,19 @@ def solution(n):
 테스트 16 〉	통과 (0.01ms, 10MB)
 테스트 17 〉	통과 (0.02ms, 10.4MB)
 """
+# runtime error남. remove써서 그런가
+def solution(n):
+    half=[i for i in range(1,int(n**0.5)+1) if n%i==0]
+    last=[n//i for i in half if n%i==0]
+    if n**0.5==int(n**0.5):
+        last.remove(n**0.5)
+    answer=sorted(half+last)
+    return answer
+
+
+
+def solution(n):
+    half=[i for i in range(1,int(n**0.5)+1) if n%i==0]
+    last=[n//i for i in half if n%i==0]
+    answer=sum(set(sorted(half+last)))
+    return answer
