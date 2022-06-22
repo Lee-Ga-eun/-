@@ -15,6 +15,9 @@ def solution(s):
 
 def alpha_string46(s):
     return s.isdigit() and len(s) in (4, 6)
+    # True and True => True
+    # True and False => False
+    # False and False => False
 
 #3. 다른 풀이: ==. >= 등 비교구문은 True/False를 반환한다
 def alpha_string46(s):
