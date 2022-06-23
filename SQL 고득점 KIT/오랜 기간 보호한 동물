@@ -1,0 +1,18 @@
+"""
+아직 입양을 못 간 동물 중 가장 오래 보호소에 있던 동물 3마리 출력
+"""
+
+
+-- 아직 입양을 못 간 동물 중. (OUTS테이블에 없는) 
+-- JOIN을 하되ㅡ null값 포함: OUTER JOIN
+-- INS테이블의 DATETIME의 오름차순으로 정렬 
+-- WHERE로 null인 것을 뽑아내기
+-- O의 ANIMAL ID는 모두 I ANIMAL ID에 있다
+SELECT I.NAME, I.DATETIME
+-- 기준테이블 INS
+FROM ANIMAL_INS AS I 
+ LEFT OUTER JOIN ANIMAL_OUTS AS O
+ ON I.ANIMAL_ID=O.ANIMAL_ID
+WHERE O.SEX_UPON_OUTCOME IS NULL
+ORDER BY I.DATETIME
+LIMIT 3
