@@ -14,3 +14,11 @@ def solution(s):
     for i in s: 
         answer+=chr(i)
     return answer
+
+    
+def solution2(s):
+    return ''.join([chr(i) for i in sorted([ord(i) for i in s], reverse=True)])
+
+def solution3(s):
+    return ''.join(sorted(s, reverse=True))
+        
