@@ -18,4 +18,14 @@ def solution(n):
                 j+=1
     return arr.count(True)
         
+# 풀이 2
 
+def solution2(n):
+    num=set(range(2,n+1))
+    for i in range(2,n+1):
+        print(num)
+        if i in num:
+            num-=set(range(i*i,n+1,i))
+            print(set(range(i*i,n+1,i)),'i가',i)
+            print(num,'num')
+    return len(num)
