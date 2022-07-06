@@ -25,3 +25,6 @@ def solution(x):
     for i in str(x):
         answer+=int(i)
     return True if x%answer==0 else False
+
+
+# ***** 자릿수를 파악하는 방법: log10(x)
