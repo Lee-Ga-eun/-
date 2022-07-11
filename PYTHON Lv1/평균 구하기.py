@@ -31,3 +31,23 @@ from functools import reduce
 def solution(arr):
     return reduce(lambda x,y : x+y , arr)/len(arr)
 
+"""
+arr=[1,2,3,4,5]
+<초기값이 없는 경우>
+sum1 = reduce(lambda x,y : x+y, arr)
+>>
+x=1 y=2
+x=3 y=3
+x=6 y=4
+x=10 y=5
+
+<초기값이 있는 경우>
+sum2= reduce(lambda x,y: x+y, arr, 0)
+
+x=0, y=1
+x=1, y=2
+x=3, y=3
+x=6, y=4
+x=10, y=5
+
+"""
