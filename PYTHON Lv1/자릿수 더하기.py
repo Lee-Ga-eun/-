@@ -64,3 +64,8 @@ def solution(n):
 테스트 21 〉	통과 (0.02ms, 10.4MB)
     """
 
+# 재귀함수를 이용하는 경우 (첫번째 풀이 재귀 버전)
+def solution(n):
+    if n<10:
+        return n
+    return n%10 + solution(n//10)
