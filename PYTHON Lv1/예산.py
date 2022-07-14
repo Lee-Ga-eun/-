@@ -49,3 +49,14 @@ def solution(d, budget):
 
 # 풀이2
 
+def solution(d,budget):
+    d.sort() # 정렬
+    while budget<sum(d):
+        d.pop()
+    return len(d)
+
+    """
+    d=[1,2,3,4,5]
+    d.pop() ==> 5 ==> d: [1,2,3,4]
+    d.pop(0) ==> 1 ==> d:[2,3,4]
+    """
