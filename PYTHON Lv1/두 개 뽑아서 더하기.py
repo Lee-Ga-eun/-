@@ -22,3 +22,12 @@ def solution(numbers):
     
     (0,5)[1]은 5
     """
+
+
+#풀이2
+def solution(numbers):
+    result=[]
+    for i in range(len(numbers)):
+        for j in range(i+1,len(numbers)): ##### 
+            result.append(numbers[i]+numbers[j])
+    return sorted(set(result))
