@@ -26,3 +26,17 @@ def solution(n):
         k-=1
     return n
 
+#풀이2
+def solution(n):
+    remainder=''
+    while n:
+        remainder+=str(n%3)
+        n=n//3
+
+    answer=int(remainder,3)
+    return answer
+
+    # int(string,3)
+    # 단, str(0012)에선, 
+    # leading zeros in decimal integer literals are not permitted;이라는 에러가 뜬다
+    
