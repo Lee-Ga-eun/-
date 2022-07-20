@@ -8,3 +8,26 @@ FROM ANIMAL_INS I
     ON I.ANIMAL_ID=O.ANIMAL_ID
 WHERE I.SEX_UPON_INTAKE != O.SEX_UPON_OUTCOME -- INS 테이블로부터 변화가 있으면:중성화한 것
 ORDER BY ANIMAL_ID ASC;
+
+-- Join을 활용하지 않은 풀이 1
+SELECT
+ ANIMAL_ID,ANIMAL_TYPE,NAME
+from ANIMAL_OUTS 
+--spayed: 난소 제거된, neutere: 중성의(거세하다)
+where (SEX_UPON_OUTCOME like 'Spayed%' or SEX_UPON_OUTCOME like 'Neutered%')
+and ANIMAL_ID in ( -- 보호소에 들어오기 전 Intact male/female 상태
+select ANIMAL_ID
+from ANIMAL_INS 
+where SEX_UPON_INTAKE like 'Intact%' -- Intact: 온전한, := undamaged
+);
+
+-- Join을 활용한 풀이
+
+SELECT A.ANIMAL_ID 아이디, A.ANIMAL_TYPE 타입, A.NAME 이름 FROM ANIMAL_OUTS A
+WHERE A.ANIMAL_ID IN (
+    SELECT A.ANIMAL_ID FROM ANIMAL_INS A JOIN ANIMAL_OUTS B
+    ON A.ANIMAL_ID = B.ANIMAL_ID
+    WHERE A.SEX_UPON_INTAKE LIKE '%Intact%'
+) 
+AND (A.SEX_UPON_OUTCOME LIKE '%Neutered%' OR A.SEX_UPON_OUTCOME LIKE '%Spayed%')
+ORDER BY ANIMAL_ID;
