@@ -51,3 +51,10 @@ def solution(a, b):
     테스트 9 〉	통과 (0.10ms, 10.3MB)
     """
 
+
+# lambda를 이용한
+def solution(a, b):
+    return sum(map(lambda i: a[i]*b[i], range(len(a))))
+
+# anonymous
+solution = lambda x, y: sum(a*b for a, b in zip(x, y))
