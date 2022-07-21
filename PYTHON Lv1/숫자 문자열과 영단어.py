@@ -26,3 +26,8 @@ def solution(s):
             # 즉, s에서 two 는 0 인덱스에 있으며, two의 길이는 3이다. s 문자열에서 0부터 3까지 탐색하고 그것이 정확히 원하는 영단어와 맞아 떨어지게 필터링을 하기 위해 if문을 썼다
             s=s.replace(changing, str(i)) #replace함수를 이용하여 영단어를 숫자로 바꿔준다. 딕셔너리가 0부터 9까지 정렬되어 있으므로, str(i)로 처리해 변경해준다
     return int(s) # 오롯이 정수형으로 리턴한다 그렇지 않으면 문자형으로 리턴된다
+
+
+# 딕셔너리 key값과 value를 for문으로 간단하게
+for key,value in alpha_dict.items():
+    print(key,value)
