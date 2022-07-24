@@ -36,3 +36,38 @@ def solution(new_id):
     생략
     """
     return new_id
+
+#정답
+def solution(new_id):
+    #1단계
+    new_id=new_id.lower() # 모든 문자를 소문자로 변환
+    #2단계
+    tmp='' # 2단계
+    for i in range(len(new_id)):
+        if (new_id[i].isalpha()) or new_id[i] in ['_','-','.'] or (new_id[i].isdigit()):
+            tmp+=new_id[i]
+            
+    new_id=tmp # 다시 복귀
+    #print(new_id)
+    #3단계
+    #***************여기 주목! 연속된 문자를 치환하는 방법!
+    while '..' in new_id:
+        new_id=new_id.replace('..','.')
+
+    #4단계 
+    if new_id[0]=='.': new_id=new_id[1:] if len(new_id)>1 else '.'
+    if new_id[-1:]=='.':new_id=new_id[:-1]
+
+    # 5단계
+    if new_id == '': new_id='a'
+    #6단계
+    if len(new_id)>=16: new_id=new_id[:15] 
+    if new_id[-1:]=='.':new_id=new_id[:-1]
+    # 7단계
+    
+    if len(new_id)<=2: 
+        adding=3-len(new_id)
+        new_id=new_id+new_id[-1:]*adding
+    
+        
+    return new_id
