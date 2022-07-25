@@ -47,6 +47,8 @@ def solution(lottos, win_nums):
     테스트 15 〉	통과 (0.03ms, 10.5MB)
     """
 
+    #*****위의 식에서 딕셔너리 value를 정수형으로 바꾸고, 형변환 없이 출력하면, 테스트 케이스 전부 0.01ms이다
+
 # 다른 풀이
 def solution(lottos, win_nums):
     rank=[6,6,5,4,3,2,1]
@@ -56,3 +58,19 @@ def solution(lottos, win_nums):
         if i in lottos:
             same_num+=1
     return [rank[same_num+zero_count],rank[same_num]]
+
+    # 실행 결과 모두 0.00ms
+
+#다른 풀이
+
+def solution(lottos, win_nums):
+    wins_dict={6:1, 5:2, 4:3,3:4,2:5,1:6,0:6}
+    return [wins_dict[len(set(lottos)&set(win_nums))+lottos.count(0)],wins_dict[len(set(lottos)&set(win_nums))]]
+
+    """
+    wins_dict={6:1, 5:2, 4:3,3:4,2:5,1:6,0:6}
+    wins_dict[0], wins_dict[1]은 6이다
+    key의 value를 얻기 위해선, 딕셔너리이름[key값]
+    
+    """
+    #테스트케이스 모두 0.01ms
