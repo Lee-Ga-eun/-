@@ -46,3 +46,13 @@ def solution(lottos, win_nums):
     테스트 14 〉	통과 (0.02ms, 10.5MB)
     테스트 15 〉	통과 (0.03ms, 10.5MB)
     """
+
+# 다른 풀이
+def solution(lottos, win_nums):
+    rank=[6,6,5,4,3,2,1]
+    zero_count=lottos.count(0) #0인 수를 센다
+    same_num=0
+    for i in win_nums: #win_nums와 얼만큼 일치하는지 센다
+        if i in lottos:
+            same_num+=1
+    return [rank[same_num+zero_count],rank[same_num]]
