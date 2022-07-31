@@ -1,7 +1,19 @@
+"""
+<입력>
+n: 5 (정사각형 지도의 한 변의 길이)
+arr1=[9,20,28,18,11] # 10진수
+arr2=[30,1,21,17,28]
+<출력>
+["#####","# # #", "### #", "# ##", "#####"] 
 
+문제:
+9를 2진수로 바꾸면 01001이다. 0이 있는 칸엔 공백이, 1이 있는 칸엔 #이 들어간다
+arr1과 arr2에 따라 공백과 #으로만 표현되어 있는 암호화된 지도가 만들어지며, 
+이 두 지도를 포갰을 때 최종적으로 나오는 지도를 출력한다
+"""
 def solution(n,arr1,arr2):
     a=[]
-    for k in range(len(arr1)):
+    for k in range(len(arr1)): #arr1에 따라 2진수가 들어간 지도
         i=0
         s=[0 for i in range(n)]
         j=arr1[k]
@@ -16,7 +28,7 @@ def solution(n,arr1,arr2):
         a.append(s_)
     
     b=[]
-    for k in range(len(arr2)):
+    for k in range(len(arr2)): # arr2에 따라 2진수가 들어간 지도
         i=0
         s=[0 for i in range(n)]
         j=arr2[k]
@@ -29,7 +41,20 @@ def solution(n,arr1,arr2):
                 break
         s_=list(reversed(s))
         b.append(s_)
-    for i in range(n):    
-        for a_,b_ in zip(a,b):
-              print(a_[0])
-    return a,b
+
+    for i in range(len(a)): # arr1과 arr2를 포갠다
+        #0부터 5까지 . i가 0일 때
+        for j in range(len(b)):
+            a[i][j]+=b[i][j]
+            if a[i][j]==1 or a[i][j]==2:
+                a[i][j]='#'
+    s=[]
+    for i in range(len(a)): #최종 결과 출력
+        answer=""       
+        for j in range(len(a)):
+            if a[i][j]==0:
+                a[i][j]=" "
+            answer+=a[i][j]
+        s.append(answer)
+    
+    return s
