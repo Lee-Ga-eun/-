@@ -58,3 +58,15 @@ def solution(n,arr1,arr2):
         s.append(answer)
     
     return s
+
+
+#다른 풀이
+def solution(n,arr1,arr2):
+    answer=[]
+    for i, j in zip(arr1,arr2):
+        a12=str(bin(i|j)[2:]) # bin함수는 변환한 2진수 앞에 0b를 출력한다
+        a12=a12.rjust(n,"0") # n의 개수에 맞춰 공백을 2번째 매개변수로 채워주며, 최종적으로 오른쪽 정렬이다
+        a12=a12.replace('1','#')
+        a12=a12.replace('0',' ')
+        answer.append(a12)
+    return answer
