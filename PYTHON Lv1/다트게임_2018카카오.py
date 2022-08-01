@@ -48,6 +48,30 @@ for j in d:
     # 없는 문자를 Index에서 찾으려고 하면, substring not found 에러가 출력된다
 
 
+# 다른 이의 성공 풀이
 
-
+#성공한 다른 이의 풀이
+def solution(dartResult):
+    point=[]
+    answer=[]
+    dartResult=dartResult.replace('10','k') #점수가 10인 것은 1 0이 되므로, 우선 k로 치환. 1점과 0점이 붙을 일은 없다
+    point=['10' if i=='k' else i for i in dartResult] #한글자씩 떼어내기. k를 다시 10으로
+    print(point)
+    
+    i=-1 #i를 한칸 앞으로 설정.즉 S가 나오면, S앞에 있는 숫자가 적용된다
+    sdt=['S','D','T'] # S는 1승, D는 2승, T는 3승
+    #answer배열엔 숫자만 들어간다.
+    for j in point:
+        if j in sdt:
+            answer[i]=answer[i]**(sdt.index(j)+1)
+        elif j=="*":
+            answer[i]=answer[i]*2
+            if i!=0: #이미 계산된 숫가 들어있을 경우
+                answer[i-1]=answer[i-1]*2
+        elif j=="#":
+            answer[i]=answer[i]*(-1)
+        else: #숫자인 경우/ 맨 처음 i는 무조건 여기로 온다
+            answer.append(int(j))
+            i+=1 #answer에 숫자가 들어갔으므로, i를 1 증가시킨다
+    return answer
     
