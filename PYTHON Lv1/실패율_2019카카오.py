@@ -26,5 +26,12 @@ def solution(N,stages):
         keep=succ[i] #킵한다는 의미
         succ[i]=succ[i]/tmp
         tmp-=keep
+    # 딕셔너리로 스테이지 부여 후, value를 정렬한 후 key값 뽑아내어 값 도출
+    suc_dict={}
+    for i in range(len(succ)):
+        suc_dict[i+1]=succ[i]
+        
+    suc_dict=sorted(suc_dict.items(), key=lambda x:x[1], reverse=True)
+    return [suc_dict[i][0] for i in range(len(suc_dict))]
     
     return succ
