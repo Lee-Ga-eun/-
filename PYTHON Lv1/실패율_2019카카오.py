@@ -20,5 +20,11 @@ def solution(N,stages):
         else:
             succ.append(0)
             j+=1
+    #실패율 계산
+    tmp=len(stages)
+    for i in range(len(succ)):
+        keep=succ[i] #킵한다는 의미
+        succ[i]=succ[i]/tmp
+        tmp-=keep
     
     return succ
