@@ -120,3 +120,40 @@ def solution(N,stages):
     suc_dict=sorted(suc_dict.items(), key=lambda x:x[1], reverse=True)
     return [suc_dict[i][0] for i in range(len(suc_dict))]
 
+
+# 같은 구조이지만 훨씬 간결하고 시간이 덜 걸리는 풀이
+def solution(N,stages):
+    succ={}
+    분모=len(stages)
+    for i in range(1,N+1):
+        if 분모!=0:
+            count=stages.count(i)
+            succ[i]=count/분모
+            분모-=count
+        else:
+            succ[i]=0
+    print(succ)
+    return sorted(succ, key=succ.get, reverse=True)
+    # key=succ.get 대신 key=lambda x:succ[x] 도 가능
+    #-> sorted에 succ(딕셔너리)를 그냥 넘기면, result의 key들이 들어간다
+    #   lambda를 써서, 정렬 기준을 succ[x], 즉 value로 한다는 것을 나타낸다
+
+"""
+*********************sorted()*************************
+
+&prototype& 
+    sorted(<list>, key=<function>, reverse=<bool>)
+    - 원본 내용을 바꾸지 않고 정렬한 값을 반환한다
+    - key를 통하여 정렬할 기준을 정할 수 있다
+    - <list>에는 list, tuple, dictionary, str 가능하다
+
+*********************sort()***************************
+
+&prototype& 
+    <list>.sort(key= <function>, reverse=<bool>)
+    - 원본 자체를 수정한다
+    - 반환값은 None
+    - tuple, dictionary, str 사용 불가능
+"""
+
+
