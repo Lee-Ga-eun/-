@@ -65,3 +65,40 @@ def solution(N,stages):
     테스트 27 〉	통과 (0.01ms, 10.4MB)
     
     """
+
+
+
+# 다시 풀고 성공
+def solution(N,stages):
+    stages=sorted(stages) # 참여자들 스테이지 정렬
+    sc=[i for i in range(1,N+1)] # 스테이지 몇 개인지 배열에 담는다. 
+    succ=[] # 몇 명이 스테이지를 성공했는지 담을 예정
+    j=0 # 스테이지를 탐색할 변수
+    for i in sc: # 스테이지를 탐색
+        if stages[j]>=i: # 현재 i라는 스테이지를 성공한 사람이 있다면
+            succ.append(stages.count(i)) #몇 명인지 세고 succ에 넣는다
+            j+=stages.count(i) #다음 스테이지 탐색
+        else: # 성공하지 못 했다면
+            succ.append(0) # 0명을 succ에 넣는다
+            j+=1 # 다음 스테이지 탐색
+        if j==len(stages): #더이상 stages에서 탐색할 게 없을 때
+            for k in range(N-stages[-1:][0]):
+                succ.append(0)
+            break
+    print(succ)
+    #실패율 계산
+    tmp=len(stages) # 스테이지 도전한 사람들 몇 명?
+    for i in range(len(succ)):
+        keep=succ[i] #킵한다는 의미
+        succ[i]=succ[i]/tmp
+        tmp-=keep
+        if tmp==0:
+            break
+            
+    suc_dict={}
+    for i in range(len(succ)):
+        suc_dict[i+1]=succ[i]
+        
+    suc_dict=sorted(suc_dict.items(), key=lambda x:x[1], reverse=True)
+    return [suc_dict[i][0] for i in range(len(suc_dict))]
+
