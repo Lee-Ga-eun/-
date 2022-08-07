@@ -13,3 +13,36 @@ k=2
 
 """
 
+# 나의 풀이: run time error
+def solution(id_list,report,k):
+    report=list(set(report))
+    r={} # {신고한 유저: 신고당한 유저} 딕셔너리로 정리할 것임
+    for i in id_list:
+        r[i]=[] #한 유저 당 한 명 이상 신고할 수 있기 때문에(append처리 위함)
+    for i in id_list: #id_list에 모든 id가 없을 수 있다. 이때 0으로 결과를 내야 한다
+        # 여기 timeout 걸리는 듯. 1<=report<=200,000 이어서.
+        for j in report: # 신고한 기록이 있을 때
+            if j.split(" ")[0] in i: # 아이디가 같을 때
+                r[i].append(j.split(" ")[1])  
+    got=[] # 신고당한 이용자들이 몇 번 신고 당했는지를 알기 위해, got배열에 신고 당한 것을 순서대로 넣었다
+    for i in report: #그럼 이것도 timeout?
+        got.append(i.split(" ")[1])
+    
+    email=[] # 누굴 신고하면 이메일을?
+    for j in got: #k번 이상 신고당한 유저가 누군지 알아내고 email에 넣는다
+        if got.count(j)>=k:
+            email.append(j)
+    email=list(set(email))
+    r=list(r.values()) # 신고당한 사람들
+    """
+    {"muzi":["frodo","neo"], "apeach":["frodo","muzi"]} 라면,
+    r=[["frodo","neo"],["frodo","muzi"]] 이고
+    email과 비교해, 몇 개가 겹치는지 판단하여 딕셔너리 값을 숫자로 변경한다
+    """
+    for i in range(len(r)): # 신고 당한 이용자들에서 메일 보내는 것에 해당하는 이용자 있는지
+        if len(set(r[i])&set(email))>=1:
+            r[i]=len(set(r[i])&set(email))
+        else:
+            r[i]=0
+        
+    return r
