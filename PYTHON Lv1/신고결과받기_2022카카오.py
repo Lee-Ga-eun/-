@@ -46,3 +46,30 @@ def solution(id_list,report,k):
             r[i]=0
         
     return r
+
+# 재풀이: 딕셔너리로 해결 (딕셔너리 시간복잡도 O(1))
+
+def solution(id_list, report, k):
+    report=list(set(report))
+    report_dict={}
+    complained_count={}
+    for i in id_list:
+        complained_count[i]=0
+    for i in id_list:
+        report_dict[i]=[]
+        
+    for i in report:
+        a,b=i.split() #a는 신고한 사람, b는 신고 당한 사람
+        report_dict[a].append(b)
+        complained_count[b]+=1 # report를 딕셔너리로 분류함과 동시에 신고당한 유저 딕셔너리 추가
+    print(report_dict) # {'muzi': ['frodo', 'neo'], 'frodo': ['neo'], 'apeach': ['frodo', 'muzi'], 'neo': []}
+    print(complained_count) #{'muzi': 1, 'frodo': 2, 'apeach': 0, 'neo': 2}
+    answer=[] # 최종 결과를 출력할 배열
+    for i,j in report_dict.items(): #i는 key, j는 value
+        result=0
+        for t in range(len(j)): #각 i의 value 순찰
+            if complained_count[(j[t])]>=k: #report_dict의 value는 compalined_count의 key
+                result+=1
+        answer.append(result)
+        
+    return answer
