@@ -57,6 +57,9 @@ def solution(id_list, report, k):
         complained_count[i]=0
     for i in id_list:
         report_dict[i]=[]
+    #---> report_dict={i:[] for i in id_list}
+    #---> complained_count={i:0 for i in id_list}
+    # key:value <== i:0/ i:[]
         
     for i in report:
         a,b=i.split() #a는 신고한 사람, b는 신고 당한 사람
