@@ -4,7 +4,7 @@
 공백 문자가 연속해서 나올 수 있다
 """
 
-
+#나의 풀이
 def solution(s):
     s=s.lower()
     s=s.lstrip()
@@ -22,3 +22,9 @@ def solution(s):
             answer.append(i)
     
     return " ".join(answer)
+
+#정답 풀이는 아니지만, 새로 알게된 title()함수
+
+"""
+"abc".title()의 결과: "Abc"
+"""
