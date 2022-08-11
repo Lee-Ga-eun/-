@@ -34,7 +34,7 @@ def solution(bridge_length, weight, truck_weights):
         print("뇸")
         cnt=-1
         
-    l=0
+    l=0 # 가장 앞에 있는 차가, 나갈 차례인지 아닌지를 파악하게 한다
     while(True):
         
         if waiting_trucks!=deque([]):
@@ -50,6 +50,7 @@ def solution(bridge_length, weight, truck_weights):
             if l==bridge_length and sum(on_bridge)+waiting_trucks[0]>weight:
                 passed_truck.append(on_bridge.popleft())
                 l=len(on_bridge) # 들어와있던 트럭에게 번호 부여
+
                 
             break
             
