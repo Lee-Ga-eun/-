@@ -49,7 +49,7 @@ def solution(bridge_length, weight, truck_weights):
             #if len(on_bridge)==bridge_length or sum(on_bridge)+waiting_trucks[0]>weight:
             if l==bridge_length and sum(on_bridge)+waiting_trucks[0]>weight:
                 passed_truck.append(on_bridge.popleft())
-                l=0
+                l=len(on_bridge) # 들어와있던 트럭에게 번호 부여
                 
             break
             
