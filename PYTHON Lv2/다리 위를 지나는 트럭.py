@@ -17,7 +17,7 @@ truck_weights=[10]
 return 101
 """
 
-#나의 풀이(미완성_)
+#나의 풀이(실패)
 from collections import deque
 def solution(bridge_length, weight, truck_weights):
     # bridge length는 트럭이 올라갈 수 있는 최대 개수이다
@@ -73,4 +73,28 @@ def solution(bridge_length, weight, truck_weights):
             
     return cnt
     
+# 다른 풀이
+from collections import deque
 
+def solution(bridge_length, weight, truck_weights):
+    queue = deque([0]*bridge_length) #deque([0,0])
+    print(queue)
+    orders = deque(truck_weights)
+    time=0
+    total=0
+    while orders: #popleft()로 인해 결국 비게 될 것이므로
+        time+=1
+        print(total,"-",queue[0])
+        total -= queue[0]
+        queue.popleft()
+        if total + orders[0] > weight:
+            queue.append(0) #무게가 0인 트럭 넣기
+            #[0,0] 혹은 [7,0] 등
+        else:
+            w = orders.popleft() #다리 위로 올라감
+            total+=w
+            queue.append(w)
+            #[0,7] 혹은 [5,4] 같은 식
+            print(queue)
+
+    return time+bridge_length # orders가 비면 끝나기 때문에
