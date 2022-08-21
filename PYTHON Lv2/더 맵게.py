@@ -7,7 +7,7 @@
 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 섞어야 하는 최소 횟수를 return
 """
 
-# 런타임 에러. 매번 정렬해서 그런 거 같음
+# 런타임 에러. 매번 정렬해서 그런 거 같음 & 계산한 값을 새로운 배열에 넣어서 연산에 포함하는 코드를 작성했으나, if문이 너무 많아짐
 from collections import deque
 def solution(scoville,k):
     count=0
