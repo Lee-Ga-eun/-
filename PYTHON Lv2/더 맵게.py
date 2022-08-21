@@ -12,16 +12,24 @@ from collections import deque
 def solution(scoville,k):
     count=0
     while(True):
-        scoville=deque(sorted(scoville))
         first=scoville.popleft()
         second=scoville.popleft()
         
-        if first<k or second<k:
+        #if first<k or second<k: #생각해보니 second<k 여부는 중요하지 않음
+        if first<k:
             mix=first+second*2
             scoville.append(mix)
             count+=1
+            if scoville[0]>k and mix>k: # 섞은 숫자 혹은 다음으로 계산할 값이 k보다 크면, 중단해도 됨
+                break
         else:
             break
-    return count or -1
+        scoville=deque(sorted(scoville)) # 시간을 조금이라도 줄이기 위해 마지막에 배치
+        
+        if len(scoville)==1: # 모든 걸 섞어도 k을 넘어서지 못 하는 경우엔 -1을 리턴
+            if scoville[0]<k:
+                return -1
+
+    return count or 0 # [10,10,10],1과 같은 케이스는, 섞을 필요가 없으므로 0을 리턴
         
     
