@@ -31,5 +31,27 @@ def solution(scoville,k):
                 return -1
 
     return count or 0 # [10,10,10],1과 같은 케이스는, 섞을 필요가 없으므로 0을 리턴
+
+"""
+heap 을 이용
+"""
+import heapq # heapify, heappush, heappop 등
+
+def solution(scoville,k):
+    heapq.heapify(scoville) # 정렬. (최소값이 최상단 노드로)
+    count=0
+    
+    while(scoville[0]<k and len(scoville)!=1):
+        mix=heapq.heappop(scoville)+heapq.heappop(scoville)*2
+        heapq.heappush(scoville,mix) # 알아서 최소값이 최상단 노드로 가게끔 정렬됨
+        count+=1
+    
+    if len(scoville)==1:
+        if scoville[0]<k:
+            return 0
+    
+    return count or -1
+    
+    
         
     
