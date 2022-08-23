@@ -44,6 +44,14 @@ def solution(clothes):
     for i in list(category.values()):
         k*=(i+1)
         
-    
-    
     return k-1
+
+# 위에서 딕셔너리를 만들기 위해 길게 쓴 코드를, 쉽게 작성해보자
+from collections import Counter
+
+def solution(clothes):
+    category=Counter([j for i,j in clothes])
+    # clothes는 2차원 배열이며 각 원소는 2개의 원소를 가진 1차원 배열이다.
+    # [의상, 종류]인 일차원 배열이며, 따라서 j는 종류를 나타낸다
+    # Counter 메서드는 같은 원소가 몇 개인지를 딕셔너리 형태로 변환시킨다
+    
