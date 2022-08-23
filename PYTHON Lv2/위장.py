@@ -48,10 +48,16 @@ def solution(clothes):
 
 # 위에서 딕셔너리를 만들기 위해 길게 쓴 코드를, 쉽게 작성해보자
 from collections import Counter
+from functools import reduce
 
 def solution(clothes):
     category=Counter([j for i,j in clothes])
     # clothes는 2차원 배열이며 각 원소는 2개의 원소를 가진 1차원 배열이다.
     # [의상, 종류]인 일차원 배열이며, 따라서 j는 종류를 나타낸다
     # Counter 메서드는 같은 원소가 몇 개인지를 딕셔너리 형태로 변환시킨다
-    
+    answer=reduce(lambda x,y:x*(y+1),category.values(),1)-1
+    #배열의 각 원소를 원하는 수식에 대입해 계산하기 위해 reduce 함수를 사용한다
+    # 3번째 원소에서 1은 초기값이다. 이를 지정하지 않으면 x에는 첫번째 원소가 들어간다
+    # category.values()가 [2,1]임을 가정하면 위의 식은 다음과 같이 풀이된다
+    #                   1*(2+1)*(1+1)-1=5
+    return answer
