@@ -46,3 +46,32 @@ def solution(progresses, speeds):
         print(days)
     
     return answer
+
+# zip과
+# 음수에서의 나눗셈을 이용한, 다른 이의 풀이
+
+def solution(progresses, speeds):
+    Q=[]
+    for p,s in zip(progresses, speeds):
+        #  17/3=  5.666666
+        # -17//3= -6
+        # -17/3=  -5.666666
+        if len(Q)==0 or Q[-1][0]<-((p-100)//s): # popleft()한 것처럼 우선 젤 앞에 것을 빼고, 앞 기능의 개발이 끝났을 때
+            Q.append([-((p-100)//s),1])
+        else: # 앞 기능이 뒷 기능보다 개발이 더 남았을 때
+            Q[-1][1]+=1 
+    
+    return [q[1] for q in Q]
+
+    """
+    Q: [[5, 1], [10, 1]]
+    Q[-1][1]: 1
+    Q: [[5, 1], [10, 2]]
+    Q[-1][1]: 2
+    Q: [[5, 1], [10, 3], [20, 1]]
+    Q[-1][1]: 1
+
+
+Out[145]: [1, 3, 2]
+    
+    """
