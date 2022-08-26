@@ -11,8 +11,9 @@ speeds=[1,30,5]
 [2,1]
 """
 
-
+# 나의 풀이
 from collections import deque
+import math
 def solution(progresses, speeds):
     answer=[]
     days=[] # 며칠동안 작업해야 하는지
@@ -20,11 +21,7 @@ def solution(progresses, speeds):
     for i in progresses:
         cal=0 #계산 초기화
         cal=(100-i)/speeds[s] # 계산 수식 (100%-현재 작업완료 퍼센트/하루 당 가능한 작업 양)=며칠동안 해야 하는지
-        if cal!=int(cal): # 계산 결과가 소수인 경우, 올림해야한다
-            cal=int(cal)
-            days.append(cal+1)
-        else:
-            days.append(int(cal))
+        days.append(math.ceil(cal))
         s+=1
     days=deque(days) # deque    
     #print(days)
