@@ -1,0 +1,13 @@
+-- 경제 카테고리에 속하는 도서들의 도서(book테이블), 저자명(author테이블), 출판일(book테이블)
+
+-- 저자명이 있다는 건, 책을 쓴 저자가 있다는 것. 따라서 author_id로 엮으면 된다
+SELECT book.BOOK_ID, author.AUTHOR_NAME, date_format(book.PUBLISHED_DATE,'%Y-%m-%d') as PUBLISED_DATE
+from book 
+left join author on book.author_id=author.author_id
+where book.category='경제'
+order by book.published_date asc;
+
+-- date_format
+-- date_format(대상, 포맷 형태)
+-- date_format(대상, '%y-%m-%d') ====> 22-06-11 형태
+-- date_format(대상, '%Y/%M/%D') ====> 2022/June/11th 형태
