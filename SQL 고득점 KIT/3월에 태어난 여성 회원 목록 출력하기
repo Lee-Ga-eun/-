@@ -1,0 +1,9 @@
+SELECT MEMBER_ID, MEMBER_NAME,GENDER, date_format(date_of_birth, '%Y-%m-%d') as DATE_OF_BIRTH
+from member_profile
+where date_format(date_of_birth, '%m') ='03' and TLNO is not null and GENDER='W'
+order by member_id asc;
+
+-- 날짜 데이터에서 3월인 사람 출력하는 방법
+-- 1. DATE_OF_BIRTH like "%-03-%"
+-- 2. MONTH(DATE_OF_BIRTH)=3
+-- 3. TO_CHAR(DATE_OF_BIRTH,'MM')='03'
