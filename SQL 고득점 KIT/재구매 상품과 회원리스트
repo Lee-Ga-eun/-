@@ -1,0 +1,9 @@
+-- 어느 회원이 같은 상품을 재구매하였는지 체크
+
+select user_id,product_id
+from(
+    SELECT user_id,product_id, count(*) as co
+    from ONLINE_SALE
+    group by user_id,product_id) as g -- g 테이블: user_id, product_id가 중복인 행을 그룹화하여 count를 통해 몇 개인지 확인
+where g.co>1
+order by user_id asc, product_id desc;
