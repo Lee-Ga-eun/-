@@ -48,3 +48,12 @@ def solution(dirs):
     print(passed)
     
     return len(dirs)-count
+
+# Do not use eval
+## 가독성을 떨어뜨리고 디버깅을 어렵게 한다
+## ** 사용자가 마음대로 프로그램에 명령을 입력할 수 있게 된다 --> 해킹
+
+
+"""
+eval을 사용하지 말자 --> 이 문제는 딕셔너리로 풀이하는 것이 좋겠다
+"""
