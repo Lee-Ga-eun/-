@@ -1,0 +1,11 @@
+
+-- first_half 테이블: 아이스크림 상반지 주문 번호 : shipment_id, flavor, total_order
+-- icecream_info: 아이스크림 성분 정보 : flavor, ingredient
+-- 상반기 동안 각 아이스크림 성분 타입과 성분 타입에 대한 아이스크림 총 주문량을 총주문량이 작은 순서대로 조회
+
+SELECT ingredient_type, sum(total_order) -- sum(*)은 불가능하다. 단, sum(1)은 count(*)와 같은 기능을 한다
+-- 단,  데이터가 없을 때 SUM(1)은 NULL을 반환하고 COUNT(*)는 0을 반환한다.
+from first_half
+inner join icecream_info on first_half.flavor=icecream_info.flavor
+group by ingredient_type
+order by sum(total_order) 
