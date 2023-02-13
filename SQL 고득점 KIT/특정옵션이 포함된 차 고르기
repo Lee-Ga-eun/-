@@ -1,0 +1,6 @@
+-- 네비게이션이 차 옵션에 포함되어 있는 차 리스트를 id 내림차순으로 조회
+
+SELECT * 
+from CAR_RENTAL_COMPANY_CAR
+WHERE OPTIONS LIKE '%네비게이션%'
+ORDER BY CAR_ID DESC
