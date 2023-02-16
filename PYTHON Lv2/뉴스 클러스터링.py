@@ -48,8 +48,7 @@ print(answer1)
 
 #내 풀이, copy 이용
 # set()은 원소 중복을 허용하지 않기 때문이다
-# 사실상 다중 집합은, 수학으로 알고 있는 합집합, 교집합 개념이다
-
+# 그냥, 집합에 원소 중복 허용하는 것 뿐이다
 def solution2(str1,str2):
     
     def check(st,arr):
@@ -89,3 +88,18 @@ def solution2(str1,str2):
 
 answer2=solution2('E=M*C^2','e=m*c^2')
 print(answer2)
+
+###### copy()
+
+a=[1,2,3,4,5]
+a1=a
+a2=a
+a[0]=100
+print("a1",a1,"a2",a2,"a",a)
+
+b=[1,2,3,4,5]
+b1=b.copy()
+b2=b.copy()
+
+b[0]=101
+print("b1",b1,"b2",b2,"b",b)
