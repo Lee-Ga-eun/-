@@ -1,0 +1,9 @@
+-- REST_REVIEW 테이블: 식당에 대한 리뷰 정보 
+-- REST_INFO: 식당 정보
+
+SELECT i.REST_ID , i.REST_NAME,i.FOOD_TYPE,  i.FAVORITES,  i.ADDRESS, ROUND(AVG(r.REVIEW_SCORE),2) AS SCORE
+from REST_INFO as i
+join REST_REVIEW as r on i.REST_ID=r.REST_ID  
+WHERE i.ADDRESS like '%서울시%' or i.ADDRESS like '%서울특별시%' -- 정답 가르는 포인트
+group by i.REST_ID
+ORDER BY ROUND(AVG(r.REVIEW_SCORE)) DESC, i.FAVORITES DESC
