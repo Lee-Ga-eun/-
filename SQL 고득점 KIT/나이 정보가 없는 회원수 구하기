@@ -1,0 +1,18 @@
+
+select count(*) as USERS
+from USER_INFO
+where age is null;
+
+-- 위에서 주의해야할 것: where로 걸러줬기 때문에 count(*) 가 문제가 없으나,
+--만약 count(age)를 한다면 age가 null인 행을 뺀 결과들을 count해주고,
+-- count(*) 를 하면 null을 포함시킨다
+
+SELECT SUM(AGE IS NULL) AS USERS
+FROM USER_INFO;
+
+-- age is null이 true면 1로 계산해 sum을 수행하고, false면 0으로 환산돼 sum이 수행된다
+
+select sum(if(age is null,1,0)) USERS
+FROM USER_INFO;
+
+-- 위의 쿼리를 조금 더 풀어쓴 쿼리로, sum 안에 if문이 생략된 것과 같았다
