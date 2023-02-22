@@ -1,0 +1,10 @@
+-- 2022년 01월에 판매된 책을 카테고리 별로 분류하고 그 카테고리별 판매량을 출력한다
+
+SELECT category, sum(sales) as TOTAL_SALES
+from BOOK as b
+join BOOK_SALES as s
+on b.book_id=s.book_id
+where year(sales_date)='2022' and month(sales_date)='01'
+group by category
+order by category asc
+
