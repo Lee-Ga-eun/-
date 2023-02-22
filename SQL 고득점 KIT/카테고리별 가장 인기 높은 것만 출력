@@ -1,0 +1,34 @@
+
+select food_type, rest_id, rest_name, favorites
+from rest_info
+where favorites in (select max(favorites) from rest_info group by food_type)
+group by food_type
+order by food_type desc;
+
+-- 실패한 쿼리
+select food_type,rest_id,rest_name,max(favorites)
+from rest_info
+group by food_type;
+-- having max(favorites)
+
+-- 실패이유: group by는 그룹화만 시켜줄 뿐이다. 즉 그룹화 했을 때 나오는 순서는 내가 선정할 수 없다
+-- 그렇기 때문에 max(favorites) 와 나머지 정보들이 따로 논다
+
+-- rank() over (partition by ~ order by ~desc) 이용
+SELECT
+    FOOD_TYPE,
+    REST_ID,
+    REST_NAME,
+    FAVORITES
+FROM
+    (SELECT
+        FOOD_TYPE,
+        REST_ID,
+        REST_NAME,
+        FAVORITES,
+        RANK() OVER (PARTITION BY FOOD_TYPE ORDER BY FAVORITES DESC) as R
+     FROM REST_INFO
+    ) AS a
+WHERE R = 1 -- 랭킹 1위인 것만 출력 (각 카테고리 별)
+ORDER BY FOOD_TYPE DESC
+
