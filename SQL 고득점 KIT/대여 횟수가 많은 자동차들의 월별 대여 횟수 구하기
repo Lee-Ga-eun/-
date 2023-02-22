@@ -1,0 +1,25 @@
+-- CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블에서 
+-- 대여 시작일을 기준으로 2022년 8월부터 2022년 10월까지 
+-- 총 대여 횟수가 5회 이상인 자동차들에 대해서 
+-- 해당 기간 동안의 월별 자동차 ID 별 총 대여 횟수(컬럼명: RECORDS) 리스트를 출력하는 SQL문을 작성해주세요. 
+-- 결과는 월을 기준으로 오름차순 정렬하고, 월이 같다면 자동차 ID를 기준으로 내림차순 정렬해주세요. 
+-- 특정 월의 총 대여 횟수가 0인 경우에는 결과에서 제외해주세요.
+
+SELECT month(start_date) as MONTH,h.car_id, count(*) as RECORDS
+from car_rental_company_rental_history as h 
+join (select car_id, count(*) as total
+            from car_rental_company_rental_history
+            where year(start_date)='2022' and month(start_date)>='08' and month(start_date)<='10'
+            group by car_id) as p
+on p.car_id=h.car_id
+where total >=5 and year(start_date)='2022' and month(start_date)>='08' and month(start_date)<='10'
+group by h.car_id, month(start_date)
+order by month(start_date) asc, car_id desc
+
+
+-- 해결하기 어려웠던 부분: 
+-- 총 대여 횟수가 5회 이상인 자동차 & 월별 자동차 ID 별 총 대여 횟수 출력
+-- group by가 2개가 필요한 상황 같아 보였다. 그래서 더 상위 부분인 총 대여 횟수 5회인 것을 서브 쿼리로 작성해 
+-- 기존 테이블과 조인시켰다. 
+-- 조인시켰을 땐, total 열이 추가되어 각 아이디가 해당 기간 동안 몇 번 출현되는지에 관한 정보가 나올 것이다
+-- 이제 메인 쿼리에서 이 횟수가 5회 이상인 것만 걸러준 다음, 자동차ID별 월별을 group by해주면 된다
