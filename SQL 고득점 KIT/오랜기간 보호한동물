@@ -1,0 +1,10 @@
+-- animal_ins: 보호하고 있거나 보호한 모든 동물 데이터
+-- animal_outs: 보호소에 있다가 입양간 동물 데이터
+-- 입양 간 동물 중 가장 오래 보호한 동물 2마리 출력
+
+SELECT i.animal_id as ANIMAL_ID , i.name as NAME
+from animal_ins as i
+join animal_outs as o
+on i.animal_id=o.animal_id
+order by datediff(o.datetime, i.datetime) desc
+limit 2
