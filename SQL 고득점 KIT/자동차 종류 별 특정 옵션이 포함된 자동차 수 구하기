@@ -1,0 +1,7 @@
+-- 옵션에 가죽시트 또는 통풍시트 또는 열선시트가 있는 차량 데이터 뽑기
+
+SELECT car_type, count(*) as CARS
+from car_rental_company_car
+where options like '%가죽시트%' or options like '%통풍시트%' or options like '%열선시트%'
+group by car_type
+order by car_type asc
