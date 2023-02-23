@@ -1,0 +1,10 @@
+
+SELECT category, price as MAX_PRICE, product_name
+from (
+    select product_id, product_name, category, price, rank() over (partition by category order by price desc) as R
+    from food_product
+    where category in ('과자','국','김치','식용유')) as A
+where A.R=1
+group by category
+having category in ('과자','국','김치','식용유')
+order by price desc
