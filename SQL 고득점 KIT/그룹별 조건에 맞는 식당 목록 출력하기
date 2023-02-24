@@ -20,3 +20,7 @@ on most_reviewer.counts=tmp.counts) as c
 join rest_review
 on rest_review.member_id=c.member_id
 order by review_date asc, review_text asc
+
+
+-- rank() over (order by count(member_id) desc)로 하면 된다!
+-- partition by 가 필수가 아니었다
