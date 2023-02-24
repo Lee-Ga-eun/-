@@ -1,0 +1,9 @@
+select flavor
+from (
+SELECT first_half.flavor, if(count(*)>=2, sum(july.total_order)+sum(first_half.total_order)-first_half.total_order, july.total_order+first_half.total_order) as TOTAL_ORDER
+from first_half 
+left join july
+on first_half.flavor=july.flavor
+group by first_half.flavor) as c
+order by c.total_order desc
+limit 3
