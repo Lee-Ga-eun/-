@@ -1,0 +1,17 @@
+-- book테이블, author테이블, book_sales테이블
+-- 2022년 1월의 도서 판매 데이터를 기준으로 저자 별, 카테고리 별 매출액을 구한다
+
+
+with bs as(
+SELECT b.book_id, b.category, b.author_id, b.price, b.published_date, s.sales
+from book as b
+left join book_sales as s
+on b.book_id=s.book_id
+where s.sales>=1 and year(sales_date)=2022 and month(sales_date)=1)
+
+select a.author_id, a.author_name, bs.category, sum(bs.sales*bs.price) as total_sales
+from bs 
+join author as a
+on bs.author_id=a.author_id
+group by author_id, category
+order by author_id asc, category desc
