@@ -1,0 +1,22 @@
+with tmp as(
+SELECT rest_review.member_id, count(rest_review.member_id) as counts, member_name
+from rest_review
+join member_profile
+on rest_review.member_id=member_profile.member_id
+group by member_id
+order by count(member_id) desc),
+
+most_reviewer as (
+select counts
+from tmp
+limit 1
+)
+
+select member_name, review_text, date_format(review_date, '%Y-%m-%d') as review_Date
+from (select member_id, member_name
+from tmp
+join most_reviewer
+on most_reviewer.counts=tmp.counts) as c
+join rest_review
+on rest_review.member_id=c.member_id
+order by review_date asc, review_text asc
