@@ -8,6 +8,8 @@ tickets의 각 행 [a,b]는 a공항에서 b공항으로 간다는 의미이다
 # 입력: [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
 # 출력: ["ICN", "ATL", "ICN", "SFO", "ATL", "SFO"]
 
+# 딕셔너리를 정렬하는 법: (value 기준)
+# tic=sorted(tic.items(), key=lambda x:x[1][1])
 
 def solution(tickets):
     answer = []
