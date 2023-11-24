@@ -1,0 +1,18 @@
+from picamera import PiCamera
+camera=PiCamera()
+import time
+import RPi.GPIO as gpio
+import mqtt.paho.client as mqtt
+import mqtt.paho.publish as publish
+import json
+import Adafruit_DHT as dht
+import speech_recognition as sr
+from RPLCD.i2c import CharLCD
+lcd=CharLCD('PCF8574', 0x3f)
+
+
+camera=PiCamera()
+camera.resolution(1024, 768)
+time.sleep(2)
+camera.capture('mm.jpg')
+camera.clear()
